@@ -1,16 +1,52 @@
-# ocr_demo
 
-A new Flutter project.
+
+# OCR Demo
+This Flutter project demonstrates how to implement OCR (Optical Character Recognition) and integrates camera functionality to capture images, processes them to extract text, and displays the recognized text in a clean and interactive UI.
+
+
+## Features 
+
+- Live Camera Integration : Utilizes the camera package for real-time image capture.
+- Text Recognition : Supports processing of both live images and gallery imports.
+- User-Friendly Interface : Allows users to scan text with a single tap and view the extracted content on a separate screen.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1) Dependencies:
+   ```
+   permission_handler: ^11.3.1
+   camera: ^0.11.0+2
+   google_mlkit_text_recognition: ^0.14.0
+   ```
+2) Code Setup :
 
-A few resources to get you started if this is your first Flutter project:
+   - initialize Camera
+     ```
+      final cameras = await availableCameras();
+      final backCamera = cameras.firstWhere(
+            (camera) => camera.lensDirection == CameraLensDirection.back,
+        orElse: () => cameras.first,
+      );
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+      cameraController = CameraController(
+        backCamera,
+        ResolutionPreset.max,
+        enableAudio: false,
+      );
+      await cameraController?.initialize();
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+     ```
+   - Scan Text from the Camera :
+     
+     ```
+     final picture = await cameraController!.takePicture();
+     final file = File(picture.path);
+     final inputImage = InputImage.fromFile(file);
+     final recognizedText = await textRecognizer.processImage(inputImage);
+     ```
+# Video
+  
+  [Uploading Screenrecorder-2025-01-22-17-10-42-787.mp4…](https://github.com/user-attachments/assets/630343f8-bad9-4f48-8c73-d674b23f66a1)
+
+
+
