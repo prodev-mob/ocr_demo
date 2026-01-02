@@ -14,9 +14,9 @@ This Flutter project demonstrates how to implement OCR (Optical Character Recogn
 
 1) Dependencies:
    ```
-   permission_handler: ^11.3.1
+   permission_handler: ^12.0.1
    camera: ^0.11.0+2
-   google_mlkit_text_recognition: ^0.14.0
+   google_mlkit_text_recognition: ^0.15.0
    ```
 2) Code Setup :
 
